@@ -1,0 +1,64 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '10.0'
+
+target 'PennyWatchers' do
+	rn_path = '../node_modules/react-native'
+	pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
+  pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"
+  pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
+  pod 'glog', :podspec => "#{rn_path}/third-party-podspecs/GLog.podspec"
+  pod 'React', path: rn_path, subspecs: [
+    'Core',
+    'CxxBridge',
+    'RCTAnimation',
+    'RCTActionSheet',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket',
+    'RCTPushNotification',
+    'RCTCameraRoll',
+    'RCTSettings',
+    'RCTBlob',
+    'RCTGeolocation',
+    'DevSupport'
+  ]
+  pod 'AppCenter/Crashes', '~> 1.13.2'
+  pod 'AppCenter/Analytics', '~> 1.13.2'
+  pod 'AppCenterReactNativeShared', '~> 1.12.2'
+	pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+	pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+ 	pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+ pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
+ pod 'react-native-photo-view-ex', :path => '../node_modules/react-native-photo-view-ex'
+
+ pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
+
+ pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
+ pod 'RNPermissions', :path => '../node_modules/react-native-permissions'
+
+	post_install do |installer|
+    installer.pods_project.targets.each do |target|
+
+      # The following is needed to ensure the "archive" step works in XCode.
+      # It removes React & Yoga from the Pods project, as it is already included in the main project.
+      # Without this, you'd see errors when you archive like:
+      # "Multiple commands produce ... libReact.a"
+      # "Multiple commands produce ... libyoga.a"
+
+      targets_to_ignore = %w(React yoga)
+      
+      if targets_to_ignore.include? target.name
+        target.remove_from_project
+      end
+
+    end
+  end
+
+end

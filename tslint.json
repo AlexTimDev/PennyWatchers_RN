@@ -1,0 +1,28 @@
+{
+	"extends": ["tslint:latest", "tslint-react"],
+	"rules": {
+		"ordered-imports": false,
+		"quotemark": [true, "single", "jsx-double"],
+		"member-access": [true, "no-public"],
+		"max-line-length": { "options": [120] },
+		"interface-name": [true, "never-prefix"],
+		"trailing-comma": [
+			true,
+			{
+				"singleline": "never",
+				"multiline": "always"
+			}
+		],
+		"triple-equals": [true],
+		"no-duplicate-imports": true,
+		"jsx-alignment": true,
+		"jsx-no-bind": true,
+		"jsx-no-lambda": true,
+		"object-literal-sort-keys": false,
+		"no-empty-interface": false,
+		"indent": [true, "tabs", 2],
+		"no-submodule-imports": [true, "redux-saga"],
+		"jsx-no-multiline-js": false,
+		"jsx-boolean-value": false
+	}
+}
